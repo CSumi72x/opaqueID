@@ -1,17 +1,22 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import router   # change this import if your router file name is different
+from routes.auth import router
 
-app = FastAPI()
 
-# CORS configuration for Vercel + Local development
+app = FastAPI(
+    title="OPAQUE ID API",
+    description="OPAQUE Authentication System Backend",
+    version="1.0.0"
+)
+
+
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "https://opaque-id-xoyp-eight.vercel.app",
-        "https://opaque-id-xoyp.vercel.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -19,12 +24,12 @@ app.add_middleware(
 )
 
 
-# Include your API routes
+# Register routes
 app.include_router(router)
 
 
 @app.get("/")
-def root():
+async def root():
     return {
         "message": "OPAQUE ID Backend is running"
     }
