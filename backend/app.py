@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from routes.auth import router
-
+from database import connect_to_mongo
 
 app = FastAPI(
     title="OPAQUE ID API",
@@ -10,7 +10,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -24,9 +23,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register routes
-app.include_router(router)
+# Connect to MongoDB when the app starts
+@app.on_event("startup")
+async def startup():
+    await connect_to_mongo()
 
+app.include_router(router)
 
 @app.get("/")
 async def root():
