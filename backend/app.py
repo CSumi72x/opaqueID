@@ -10,19 +10,19 @@ app = FastAPI(
     version="1.0.0"
 )
 
-
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "https://opaque-id-xoyp-eight.vercel.app",
+        "https://opaque-id-xoyp-git-main-csumi72xs-projects.vercel.app",
+        "https://opaque-id-xoyp-pz3xvky2l-csumi72xs-projects.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # Register routes
 app.include_router(router)
