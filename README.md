@@ -1,45 +1,39 @@
 # OPAQUE ID Authentication System
 
-## Overview
-A secure authentication system implementing the OPAQUE password-authenticated key exchange protocol.
+## About
+A simple login and registration system built using OPAQUE authentication.
 
 ## Features
 - User Registration
 - User Login
-- Password Hashing
+- Secure Password Storage
 - MongoDB Database
-- FastAPI Backend
-- React Frontend
 
 ## Tech Stack
 - React
 - FastAPI
-- MongoDB Atlas
-- MongoDB Compass
+- MongoDB
 - Python
 - JavaScript
 
-## Folder Structure
+## Project Structure
+```
 backend/
 frontend/
+```
 
-## Installation
+## Run the Project
 
 ### Backend
+```bash
 cd backend
 pip install -r requirements.txt
 uvicorn app:app --reload
+```
 
 ### Frontend
+```bash
 cd frontend
 npm install
 npm run dev
-
-## Screenshots
-(Add screenshots)
-
-## Future Improvements
-- JWT Authentication
-- Email Verification
-- Password Reset
-- Docker Deployment
+```
