@@ -1,39 +1,49 @@
 # OPAQUE ID Authentication System
 
-## About
-A simple login and registration system built using OPAQUE authentication.
+A secure authentication system built using **Oblivious Pseudorandom Function (OPRF)**-based authentication with **React**, **FastAPI**, and **MongoDB Atlas**.
 
-## Features
-- User Registration
-- User Login
-- Secure Password Storage
-- MongoDB Database
+##  Live Demo
+
+**Frontend (Web Application)**
+
+https://opaque-id-xoyp-eight.vercel.app
+
+##  Backend API
+
+**Backend**
+
+https://opaqueid-backend.onrender.com
+
+**API Documentation (Swagger)**
+
+https://opaqueid-backend.onrender.com/docs
+
+##  Features
+
+* User Registration
+* Secure User Login
+* OPRF-based Password Authentication
+* JWT-based Session Authentication
+* MongoDB Atlas Cloud Database
+* Fully Deployed on Vercel and Render
 
 ## Tech Stack
-- React
-- FastAPI
-- MongoDB
-- Python
-- JavaScript
 
-## Project Structure
-```
-backend/
-frontend/
-```
+* React (Vite)
+* FastAPI
+* MongoDB Atlas
+* OPRF (Oblivious Pseudorandom Function)
+* JWT Authentication
+* Vercel
+* Render
 
-## Run the Project
+##  How to Use
 
-### Backend
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn app:app --reload
-```
+1. Open the live application.
+2. Register a new account.
+3. Log in using your registered credentials.
+4. Access the protected application features.
 
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+## 👩‍💻 Author
+
+**Sumi Chasa**
