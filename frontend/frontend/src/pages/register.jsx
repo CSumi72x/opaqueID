@@ -1,88 +1,108 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../services/api";
+import "../styles/Auth.css";
 
 function Register() {
 
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [username,setUsername]=useState("");
+    const [email,setEmail]=useState("");
+    const [password,setPassword]=useState("");
 
-    const handleRegister = async (e) => {
+    const handleRegister=async(e)=>{
 
         e.preventDefault();
 
-        try {
+        try{
 
-            const response = await api.post("/register", {
+            const res=await api.post("/register",{
                 username,
                 email,
                 password
             });
 
-            alert(response.data.message);
+            alert(res.data.message);
 
-            setUsername("");
-            setEmail("");
-            setPassword("");
+        }catch(error){
 
-        } catch (error) {
+            if(error.response){
 
-    console.log(error);
+                alert(error.response.data.message);
 
-    if (error.response) {
-        alert(error.response.data.message);
-    } else {
-        alert(error.message);
+            }else{
+
+                alert("Server Error");
+
+            }
+
+        }
+
     }
 
-}
+    return(
 
-    };
+<div className="auth-container">
 
-    return (
+<div className="auth-card">
 
-        <div>
+<h1>Register</h1>
 
-            <h2>Register</h2>
+<p>Create your account.</p>
 
-            <form onSubmit={handleRegister}>
+<form onSubmit={handleRegister}>
 
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
+<label>Username</label>
 
-                <br /><br />
+<input
+type="text"
+value={username}
+onChange={(e)=>setUsername(e.target.value)}
+placeholder="Username"
+/>
 
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
+<label>Email</label>
 
-                <br /><br />
+<input
+type="email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+placeholder="Email"
+/>
 
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+<label>Password</label>
 
-                <br /><br />
+<input
+type="password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+placeholder="Password"
+/>
 
-                <button type="submit">
-                    Register
-                </button>
+<button type="submit">
 
-            </form>
+Register
 
-        </div>
+</button>
 
-    );
+<p className="bottom-text">
+
+Already have an account?
+
+<Link to="/login">
+
+ Login
+
+</Link>
+
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+)
 
 }
 

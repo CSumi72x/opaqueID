@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import api from "../services/api";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "../styles/Auth.css";
 
 function Login() {
-
-  const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,96 +11,58 @@ function Login() {
     e.preventDefault();
 
     try {
-
-      const response = await api.post("/login", {
+      const res = await axios.post("http://127.0.0.1:8000/login", {
         email,
         password,
       });
 
-      // Save JWT Token
-      localStorage.setItem(
-        "token",
-        response.data.access_token
-      );
-
-      // Save User Details
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          username: response.data.username,
-          email: response.data.email,
-        })
-      );
-
-      alert(response.data.message);
-
-      // Clear form
-      setEmail("");
-      setPassword("");
-
-      // Redirect to Profile
-      navigate("/profile");
-
-    } catch (error) {
-
-      console.log(error);
-
-      if (error.response) {
-
-        alert(error.response.data.message);
-
-      } else {
-
-        alert("Server Error");
-
-      }
-
+      alert(res.data.message);
+    } catch (err) {
+      alert("Login Failed");
     }
   };
 
   return (
+    <div className="auth-container">
+      <div className="auth-card">
 
-    <div
-      style={{
-        textAlign: "center",
-        marginTop: "50px",
-      }}
-    >
+        <h1>Login</h1>
 
-      <h1>Login</h1>
+        <p>Access your account to continue.</p>
 
-      <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <label>Email</label>
 
-        <br />
-        <br />
+          <input
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <label>Password</label>
 
-        <br />
-        <br />
+          <input
+            type="password"
+            placeholder="********"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <button type="submit">
-          Login
-        </button>
+          <button type="submit">Login</button>
 
-      </form>
+          <p className="bottom-text">
+            Don't have an account?
+            <Link to="/register"> Sign Up</Link>
+          </p>
 
+        </form>
+
+      </div>
     </div>
-
   );
 }
 
