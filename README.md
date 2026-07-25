@@ -43,7 +43,3 @@ https://opaqueid-backend.onrender.com/docs
 2. Register a new account.
 3. Log in using your registered credentials.
 4. Access the protected application features.
-
-## 👩‍💻 Author
-
-**Sumi Chasa**
