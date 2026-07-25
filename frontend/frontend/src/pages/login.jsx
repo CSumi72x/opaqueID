@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../services/api";
 import "../styles/Auth.css";
 
 function Login() {
@@ -11,14 +11,26 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://127.0.0.1:8000/login", {
+      const res = await api.post("/login", {
         email,
         password,
       });
 
       alert(res.data.message);
+
+      if (res.data.message === "Login Successful") {
+        window.location.href = "/";
+      }
+
     } catch (err) {
-      alert("Login Failed");
+      console.error("Login Error:", err);
+
+      if (err.response) {
+        console.log("Backend Response:", err.response.data);
+        alert(err.response.data.message);
+      } else {
+        alert("Unable to connect to the server.");
+      }
     }
   };
 
@@ -52,7 +64,9 @@ function Login() {
             required
           />
 
-          <button type="submit">Login</button>
+          <button type="submit">
+            Login
+          </button>
 
           <p className="bottom-text">
             Don't have an account?
